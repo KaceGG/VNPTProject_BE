@@ -6,8 +6,6 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
@@ -25,9 +23,10 @@ public class Screening implements Serializable {
     @JoinColumn(name = "auditorium_id")
     private Auditorium auditorium;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
+
     @OneToOne(mappedBy = "screening")
     private Ticket ticket;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "screening", orphanRemoval = true)
-    private List<Movie> movies = new ArrayList<>();
 }

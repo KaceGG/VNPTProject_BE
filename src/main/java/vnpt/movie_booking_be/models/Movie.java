@@ -6,7 +6,9 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -35,6 +37,6 @@ public class Movie implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Screening screening;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie", orphanRemoval = true)
+    private List<Screening> screenings = new ArrayList<>();
 }
