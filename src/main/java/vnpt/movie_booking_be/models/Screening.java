@@ -3,21 +3,20 @@ package vnpt.movie_booking_be.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
-public class Screening implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
+public class Screening{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String type;
+    
     private LocalDateTime start;
+    private LocalDate date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "auditorium_id")
@@ -26,7 +25,7 @@ public class Screening implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "movie_id")
     private Movie movie;
-
-    @OneToOne(mappedBy = "screening")
-    private Ticket ticket;
+    
+    @OneToMany(mappedBy = "screening" , cascade = CascadeType.ALL , orphanRemoval = true)
+	private Set<Ticket> ticket =  new HashSet<>();
 }

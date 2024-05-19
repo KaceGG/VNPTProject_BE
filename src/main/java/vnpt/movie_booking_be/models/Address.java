@@ -3,15 +3,9 @@ package vnpt.movie_booking_be.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 @Data
 @Entity
-public class Address implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -23,7 +17,7 @@ public class Address implements Serializable {
 
     @OneToOne(mappedBy = "address")
     private User user;
-
+    
     @OneToOne(mappedBy = "address")
     private Cinema cinema;
 }
