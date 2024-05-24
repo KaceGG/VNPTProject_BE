@@ -1,18 +1,14 @@
-package vnpt.movie_booking_be.dto.request;
+package vnpt.movie_booking_be.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserCreationRequest {
+public class GenreResponse {
+    int id;
     String name;
-    String email;
-    String phone;
-    String password;
-    AddressRequest address;
 }

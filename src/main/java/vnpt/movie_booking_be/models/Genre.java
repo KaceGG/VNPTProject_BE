@@ -1,26 +1,25 @@
 package vnpt.movie_booking_be.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
-public class Genre implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
     @ManyToMany(mappedBy = "genres")
-    @JsonIgnore
     private Set<Movie> movies = new HashSet<>();
 }

@@ -1,4 +1,4 @@
-package vnpt.movie_booking_be.dto.request;
+package vnpt.movie_booking_be.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,9 +8,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AddressRequest {
-    String street;
-    String ward;
-    String district;
-    String city;
+public class RoleResponse {
+     int id;
+     String name;
 }

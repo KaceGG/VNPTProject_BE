@@ -6,4 +6,5 @@ import vnpt.movie_booking_be.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
+    User findByEmail(String email);
 }

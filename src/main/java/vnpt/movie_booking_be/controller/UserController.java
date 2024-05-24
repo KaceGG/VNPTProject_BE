@@ -1,23 +1,34 @@
 package vnpt.movie_booking_be.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import vnpt.movie_booking_be.dto.request.UserCreationRequest;
-import vnpt.movie_booking_be.models.User;
+import vnpt.movie_booking_be.dto.response.UserResponse;
 import vnpt.movie_booking_be.service.UserService;
 
+import java.util.List;
+
 @RestController
-@RequestMapping
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/createUser")
-    public User createUser(@RequestBody UserCreationRequest request) {
-        return userService.createUser(request);
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/getall")
+    public List<UserResponse> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @PostMapping("/createUser")
+    public void createUser(@RequestBody UserCreationRequest request) {
+        userService.createUser(request);
+    }
+
+    @PutMapping("/updateUser/{userid}")
+    public void getUser(@PathVariable int userid,@RequestBody UserCreationRequest request) {
+        userService.updateUser(userid,request);
     }
 }
